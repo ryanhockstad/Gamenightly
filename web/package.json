@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "preview:cf": "npm run build && wrangler dev -c wrangler.jsonc -c wrangler.sessions.jsonc",
     "deploy": "npm run build && wrangler deploy",
-    "deploy:api": "wrangler deploy -c wrangler.sessions.jsonc"
+    "deploy:api": "wrangler deploy -c wrangler.sessions.jsonc",
+    "deploy:preview": "npm run build && wrangler versions upload --preview-alias \"$(printf '%s' \"${WORKERS_CI_BRANCH:-preview}\" | tr '[:upper:]' '[:lower:]' | sed -e 's/[^a-z0-9-]/-/g' -e 's/--*/-/g' -e 's/^-//' | cut -c1-40 | sed 's/-$//')\""
   },
   "dependencies": {
     "luxon": "^3.7.2",

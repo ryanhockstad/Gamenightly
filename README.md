@@ -39,6 +39,7 @@ cd web
 npm run preview:cf   # build and run both Workers locally (http://localhost:8787)
 npm run deploy:api   # deploy the sessions Worker (deploy this first when both change)
 npm run deploy       # build and deploy the site Worker
+WORKERS_CI_BRANCH=my-branch npm run deploy:preview   # upload a preview at my-branch-gamenightly.aaglidd.workers.dev
 ```
 
 Sessions survive redeploys. Each one deletes itself 30 days after its last date or confirmed time.
