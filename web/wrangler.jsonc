@@ -1,8 +1,11 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
+  // Site Worker. Deploy the sessions Worker (wrangler.sessions.jsonc) first.
   "name": "gamenightly",
-  "main": "worker/index.ts",
+  "main": "worker/site.ts",
   "compatibility_date": "2026-09-01",
+  "workers_dev": true,
+  "preview_urls": true,
   // Built front end; unknown paths fall back to index.html so /s/:slug links work.
   "assets": {
     "directory": "./dist",
@@ -10,10 +13,11 @@
     "not_found_handling": "single-page-application",
     "run_worker_first": ["/api/*"]
   },
-  // One Durable Object per session (SQLite-backed, available on the free plan).
-  "durable_objects": {
-    "bindings": [{ "name": "SESSIONS", "class_name": "SessionStore" }]
-  },
-  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["SessionStore"] }],
+  "services": [{ "binding": "API", "service": "gamenightly-sessions" }],
+  // v1 created the session store here; v2 removes it (it moved to gamenightly-sessions).
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["SessionStore"] },
+    { "tag": "v2", "deleted_classes": ["SessionStore"] }
+  ],
   "observability": { "enabled": true }
 }

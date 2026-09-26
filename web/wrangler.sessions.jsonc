@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Stand-in API Worker. Private: only reachable through the site Worker's service binding.
+  "name": "gamenightly-sessions",
+  "main": "worker/sessions.ts",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": false,
+  "preview_urls": false,
+  // One Durable Object per session (SQLite-backed, available on the free plan).
+  "durable_objects": {
+    "bindings": [{ "name": "SESSIONS", "class_name": "SessionStore" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["SessionStore"] }],
+  "observability": { "enabled": true }
+}

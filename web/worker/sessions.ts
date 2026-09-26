@@ -1,11 +1,11 @@
-// Cloudflare Worker: serves the built front end (static assets) and the API under /api.
-// Each session lives in its own Durable Object, which handles one request at a time,
-// so the join cap and save-vs-confirm can't race. A stand-in until the real backend exists.
+// The stand-in API as its own Worker ("gamenightly-sessions"). Each session lives in one Durable
+// Object, which handles one request at a time, so the join cap and save-vs-confirm can't race.
+// It has no public URL: the site Worker reaches it through a service binding. Kept separate from
+// the site because Cloudflare doesn't create preview URLs for Workers that define a Durable Object.
 import { DurableObject } from "cloudflare:workers";
 import { expiresAt, handle, newSlug, SLUG_RE, type Session } from "../mock/core.ts";
 
 interface Env {
-  ASSETS: Fetcher;
   SESSIONS: DurableObjectNamespace<SessionStore>;
 }
 
@@ -13,12 +13,9 @@ const notFound = () =>
   Response.json({ error: { code: "not_found", message: "Session not found" } }, { status: 404 });
 
 export default {
+  /** Expects /api/... paths (forwarded unchanged by the site Worker). */
   async fetch(req: Request, env: Env): Promise<Response> {
-    const url = new URL(req.url);
-    if (!url.pathname.startsWith("/api/")) return env.ASSETS.fetch(req);
-
-    // Route to the session's Durable Object; a new session gets a fresh slug.
-    const path = url.pathname.slice(4);
+    const path = new URL(req.url).pathname.replace(/^\/api/, "");
     let slug: string;
     if (req.method === "POST" && path === "/sessions") slug = newSlug();
     else {

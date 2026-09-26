@@ -9,8 +9,9 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "preview:cf": "npm run build && wrangler dev",
-    "deploy": "npm run build && wrangler deploy"
+    "preview:cf": "npm run build && wrangler dev -c wrangler.jsonc -c wrangler.sessions.jsonc",
+    "deploy": "npm run build && wrangler deploy",
+    "deploy:api": "wrangler deploy -c wrangler.sessions.jsonc"
   },
   "dependencies": {
     "luxon": "^3.7.2",
