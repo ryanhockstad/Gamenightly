@@ -5,7 +5,7 @@ A when2meet-style scheduler for gaming sessions: the organizer picks dates and a
 ## Layout
 
 - `web/`: the front end (Vite + React), plus a stand-in API until the real backend exists.
-  - `web/mock/core.ts`: the stand-in API. Local dev runs it in memory (`mock/server.ts`); Cloudflare runs it in a Worker with one Durable Object per session (`web/worker/index.ts`).
+  - `web/mock/core.ts`: the stand-in API. Local dev runs it in memory (`mock/server.ts`); Cloudflare runs it in a Worker with one Durable Object per session (`web/worker/sessions.ts`).
   - [`web/API.md`](web/API.md): the HTTP API the front end calls.
   - [`web/DATA-REQUIREMENTS.md`](web/DATA-REQUIREMENTS.md): what the backend must store, compute and enforce.
   - `web/mock/lib/`: the window and matching logic, which a backend can reuse.
