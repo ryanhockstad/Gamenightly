@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "gamenightly",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-01",
+  // Built front end; unknown paths fall back to index.html so /s/:slug links work.
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  // One Durable Object per session (SQLite-backed, available on the free plan).
+  "durable_objects": {
+    "bindings": [{ "name": "SESSIONS", "class_name": "SessionStore" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["SessionStore"] }],
+  "observability": { "enabled": true }
+}

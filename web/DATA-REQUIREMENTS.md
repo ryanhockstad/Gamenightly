@@ -3,7 +3,7 @@
 What the backend has to store, compute and enforce for the front end to work. It describes what's needed, not how: the database, schema, stack and hosting are Ryan's call. The endpoints are in [API.md](API.md).
 
 **Reference code:**
-- **Mock API:** `web/mock/server.ts` implements the API behavior in memory. It doesn't implement retention or notifications.
+- **Stand-in API:** `web/mock/core.ts` implements the API. Locally it keeps data in memory. On the Cloudflare test deployment (`web/worker/index.ts`), each session is a Durable Object that deletes itself when it expires. Neither version sends Discord notifications.
 - **Shared logic:** `web/mock/lib/windows.ts` (daily windows) and `web/mock/lib/matching.ts` (matching) can be copied as-is.
 - **Archived Postgres version:** `archive/data-layer/` is no longer used, but it has tested ideas worth borrowing: race-safe joins, DST tests, token hashing.
 

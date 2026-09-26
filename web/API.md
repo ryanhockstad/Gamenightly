@@ -3,7 +3,7 @@
 The HTTP API the web front end calls. The storage and rules behind it are in [DATA-REQUIREMENTS.md](DATA-REQUIREMENTS.md).
 
 - **Types:** `web/src/api.ts` is the only front-end module that calls the API.
-- **Reference implementation:** `web/mock/server.ts` is an in-memory mock that `npm run dev` serves at `/api`. It covers every endpoint and error below.
+- **Reference implementation:** `web/mock/core.ts` implements every endpoint and error below. `npm run dev` serves it at `/api` from memory. The test deployment at https://gamenightly.aaglidd.workers.dev runs the same code on Cloudflare, with one Durable Object per session (`web/worker/index.ts`).
 
 ## Conventions
 
