@@ -9,7 +9,7 @@ import { allTimezones, detectTimezone, durationLabel, minuteLabel } from "../tim
 
 const DURATIONS = [60, 90, 120, 150, 180, 240, 300, 360];
 const HOURS = Array.from({ length: 24 }, (_, h) => h * 60);
-const MAX_SPAN_DAYS = 14;
+const MAX_SPAN_DAYS = 35;
 
 /** Details carried over when an organizer cancels and starts again. */
 export interface Prefill {

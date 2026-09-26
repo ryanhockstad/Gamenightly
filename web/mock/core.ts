@@ -190,8 +190,8 @@ async function route(method: string, path: string, body: Body, req: Request, sto
     const latest = Number(body.latest_minute ?? 120);
     const dates = [...new Set(Array.isArray(body.dates) ? body.dates.map(String) : [])].sort();
     if (!dates.length || !dates.every(isIsoDate)) fail(400, "invalid", "Pick at least one date");
-    if (Date.parse(dates[dates.length - 1]) - Date.parse(dates[0]) > 13 * 86_400_000)
-      fail(400, "invalid", "Dates must fall within 14 days");
+    if (Date.parse(dates[dates.length - 1]) - Date.parse(dates[0]) > 34 * 86_400_000)
+      fail(400, "invalid", "Dates must fall within 35 days");
     for (const m of [earliest, latest])
       if (!Number.isInteger(m) || m < 0 || m > 1439 || m % 30 !== 0) fail(400, "invalid", "Times must be on 30-minute steps");
     if (!(duration >= 30 && duration <= 720)) fail(400, "invalid", "Duration must be 30 minutes to 12 hours");

@@ -13,7 +13,7 @@ What the backend has to store, compute and enforce for the front end to work. It
 - **Identity is a link plus a secret.** An organizer secret per session and an edit secret per participant, both 32 random bytes. Store only a hash (e.g. SHA-256) and compare in constant time.
 - **Store times in UTC.** Time zones (IANA names) are kept only to compute windows and label things; the front end handles each viewer's display.
 - **Fixed slot size of 30 minutes,** aligned to UTC. Every stored time is on a 30-minute boundary.
-- **Small scale by design.** At most 4 participants and 14 dates of up to 48 slots each. Computing matches on every read is cheap, so there's no need to store them.
+- **Small scale by design.** At most 4 participants and 35 dates of up to 48 slots each. Computing matches on every read is cheap, so there's no need to store them.
 
 ## What to store
 
@@ -26,7 +26,7 @@ What the backend has to store, compute and enforce for the front end to work. It
 | `title` | 1–100 chars | Header, invite text, `.ics` name |
 | `game` | Optional, ≤ 100 chars | Header, invite text, `.ics` summary |
 | `duration_minutes` | 30–720, default 120 | Match length; confirm end = start + duration |
-| `dates` | Set of 1–14 dates (organizer's zone), span ≤ 14 days | Grid columns; prefill on cancel |
+| `dates` | Set of 1–35 dates (organizer's zone), span ≤ 35 days | Grid columns; prefill on cancel |
 | `earliest_minute`, `latest_minute` | 0–1439, multiples of 30; defaults 1020 / 120 | Daily window; prefill on cancel |
 | `organizer_timezone` | IANA zone | Window computation; invite text |
 | `max_participants` | 2–4, default 4 | Cap, "N of M responded", heat scale (all M free = gold) |
@@ -100,7 +100,7 @@ Let D = `duration_minutes` and step = 30 minutes. Use only participants who have
 5. **Sort** by the number available (most first), then by `first_start` (earliest first).
 6. **Return** `{ windows, responded_count, max_participants }`.
 
-Worst case is about 14 × 48 candidates × 4 participants, well under 3,000 checks. Compute it on each `GET`.
+Worst case is about 35 × 48 candidates × 4 participants, under 7,000 checks. Compute it on each `GET`.
 
 The front end shows the top 3 windows. It uses `first_start`–`last_start` to offer start times, and treats a window as a full match when `available_ids.length == max_participants`.
 
@@ -147,7 +147,6 @@ collecting ──confirm──▶ confirmed ──reopen──▶ collecting
 
 ## Open questions
 
-1. **Date span:** keep the 14-day limit, or raise it to match the front end's 5-week calendar? That means changing the front end's `MAX_SPAN_DAYS` and the create validation.
-2. **Reminder timing:** the PRD suggests one reminder 1 hour before. Should the organizer be able to change it?
-3. **Lost edit links:** can the organizer remove or reset a player who lost theirs?
-4. **Live updates:** polling every 15 seconds is enough for the MVP. Server-sent events or a websocket would make the overlap heat update instantly.
+1. **Reminder timing:** the PRD suggests one reminder 1 hour before. Should the organizer be able to change it?
+2. **Lost edit links:** can the organizer remove or reset a player who lost theirs?
+3. **Live updates:** polling every 15 seconds is enough for the MVP. Server-sent events or a websocket would make the overlap heat update instantly.

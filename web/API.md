@@ -72,7 +72,7 @@ The front end shows `message` to users as-is, so write it in plain language. It 
 | `title` | Required. Trimmed. 1–100 characters. |
 | `game` | Optional. Trimmed. Empty becomes `null`. Up to 100 characters. |
 | `duration_minutes` | 30–720. Default 120. Must not exceed the daily window's length. |
-| `dates` | 1–14 unique valid dates. Last minus first ≤ 13 days (a 14-day span). |
+| `dates` | 1–35 unique valid dates. Last minus first ≤ 34 days (a 35-day span, the 5 weeks the date picker shows). |
 | `earliest_minute` | "No earlier than", in minutes after local midnight. 0–1439, a multiple of 30. Default 1020 (5 PM). |
 | `latest_minute` | "No later than". 0–1439, a multiple of 30. Default 120 (2 AM). If it's ≤ `earliest_minute`, the window ends the next day; equal means 24 hours. |
 | `organizer_timezone` | Valid IANA zone. |
