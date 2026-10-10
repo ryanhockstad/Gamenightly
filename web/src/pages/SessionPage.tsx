@@ -4,6 +4,7 @@ import { api, ApiError, type SessionView } from "../api";
 import { AvailabilityGrid } from "../components/AvailabilityGrid";
 import { heatColor } from "../heat";
 import { CopyButton } from "../components/CopyButton";
+import { GameCover } from "../components/GamePicker";
 import { Matches } from "../components/Matches";
 import type { Prefill } from "./CreatePage";
 import { absorbHash, editLink, organizerLink, saveIdentity, shareLink, type Identity } from "../identity";
@@ -92,7 +93,7 @@ export function SessionPage() {
     // Restart the flow: back to create, prefilled with this session's details.
     const prefill: Prefill = {
       title: view.title,
-      game: view.game,
+      game: view.game ? { name: view.game, igdbId: view.game_igdb_id ?? null, coverUrl: view.game_cover_url ?? null } : null,
       durationMinutes: view.duration_minutes,
       maxParticipants: view.max_participants,
       timezone: view.organizer_timezone,
@@ -107,7 +108,12 @@ export function SessionPage() {
       <header className="session-head">
         <h1>{view.title}</h1>
         <p className="meta">
-          {view.game && <span className="meta-game">{view.game}</span>}
+          {view.game && (
+            <span className="meta-game">
+              {view.game_igdb_id != null && <GameCover name={view.game} url={view.game_cover_url} />}
+              {view.game}
+            </span>
+          )}
           <span>{durationLabel(view.duration_minutes)}</span>
           <ZoneInline zone={zone} onChange={(z) => update({ displayZone: z })} />
         </p>

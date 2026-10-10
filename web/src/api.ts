@@ -25,10 +25,21 @@ export interface MatchWindow {
   missing_ids: string[];
 }
 
+/** A game search result. Data comes from IGDB. */
+export interface Game {
+  igdb_id: number;
+  name: string;
+  year: number | null;
+  cover_url: string | null;
+}
+
 export interface SessionView {
   public_slug: string;
   title: string;
   game: string | null;
+  /** Set when the game was picked from search; null for a typed name. */
+  game_igdb_id: number | null;
+  game_cover_url: string | null;
   duration_minutes: number;
   dates: string[]; // YYYY-MM-DD, organizer's zone
   earliest_minute: number; // "no earlier than", minutes after local midnight
@@ -53,6 +64,8 @@ export interface SessionView {
 export interface CreateSessionBody {
   title: string;
   game?: string | null;
+  /** From a search result. The server then uses IGDB's name and cover. */
+  game_igdb_id?: number | null;
   duration_minutes: number;
   dates: string[];
   earliest_minute: number;
@@ -74,7 +87,11 @@ export class ApiError extends Error {
   }
 }
 
-async function request<T>(method: string, path: string, opts: { body?: unknown; token?: string } = {}): Promise<T> {
+async function request<T>(
+  method: string,
+  path: string,
+  opts: { body?: unknown; token?: string; signal?: AbortSignal } = {},
+): Promise<T> {
   const headers: Record<string, string> = {};
   if (opts.body !== undefined) headers["Content-Type"] = "application/json";
   if (opts.token) headers["Authorization"] = `Bearer ${opts.token}`;
@@ -84,8 +101,10 @@ async function request<T>(method: string, path: string, opts: { body?: unknown; 
       method,
       headers,
       body: opts.body === undefined ? undefined : JSON.stringify(opts.body),
+      signal: opts.signal,
     });
-  } catch {
+  } catch (err) {
+    if (opts.signal?.aborted) throw err;
     throw new ApiError("network", "Couldn't reach the server. Check your connection and try again.", 0);
   }
   if (res.status === 204) return undefined as T;
@@ -100,6 +119,9 @@ async function request<T>(method: string, path: string, opts: { body?: unknown; 
 const s = (slug: string) => `/s/${encodeURIComponent(slug)}`;
 
 export const api = {
+  searchGames: (q: string, signal?: AbortSignal) =>
+    request<{ games: Game[] }>("GET", `/games/search?q=${encodeURIComponent(q)}`, { signal }),
+
   createSession: (body: CreateSessionBody) =>
     request<{ public_slug: string; organizer_token: string }>("POST", "/sessions", { body }),
 

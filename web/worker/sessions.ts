@@ -3,7 +3,7 @@
 // It has no public URL: the site Worker reaches it through a service binding. Kept separate from
 // the site because Cloudflare doesn't create preview URLs for Workers that define a Durable Object.
 import { DurableObject } from "cloudflare:workers";
-import { expiresAt, handle, newSlug, SLUG_RE, type Session } from "../mock/core.ts";
+import { expiresAt, handle, newSlug, SLUG_RE, type Session, type Store } from "../mock/core.ts";
 
 interface Env {
   SESSIONS: DurableObjectNamespace<SessionStore>;
@@ -12,10 +12,18 @@ interface Env {
 const notFound = () =>
   Response.json({ error: { code: "not_found", message: "Session not found" } }, { status: 404 });
 
+const noStore: Store = {
+  get: async () => undefined,
+  put: async () => {},
+  newSlug,
+};
+
 export default {
   /** Expects /api/... paths (forwarded unchanged by the site Worker). */
   async fetch(req: Request, env: Env): Promise<Response> {
     const path = new URL(req.url).pathname.replace(/^\/api/, "");
+    // Game search doesn't touch a session, so it skips the Durable Objects.
+    if (path === "/games/search") return handle(req, noStore, "/api");
     let slug: string;
     if (req.method === "POST" && path === "/sessions") slug = newSlug();
     else {

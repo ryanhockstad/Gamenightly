@@ -4,6 +4,7 @@
 import { computeMatches, mergeBlocks } from "./lib/matching.ts";
 import { dayWindows, isIsoDate, windowLengthMinutes, withinWindows, type DayWindow } from "./lib/windows.ts";
 import { safeFilename } from "../src/filename.ts";
+import { gameById, searchGames } from "./games.ts";
 
 const MINUTE = 60_000;
 
@@ -22,6 +23,9 @@ export interface Session {
   organizer_hash: string;
   title: string;
   game: string | null;
+  /** IGDB id when the game was picked from search. Missing on sessions stored before it existed. */
+  game_igdb_id?: number | null;
+  game_cover_url?: string | null;
   duration_minutes: number;
   dates: string[];
   earliest_minute: number;
@@ -113,6 +117,8 @@ function view(s: Session) {
     public_slug: s.public_slug,
     title: s.title,
     game: s.game,
+    game_igdb_id: s.game_igdb_id ?? null,
+    game_cover_url: s.game_cover_url ?? null,
     duration_minutes: s.duration_minutes,
     organizer_timezone: s.organizer_timezone,
     dates: s.dates,
@@ -179,11 +185,22 @@ type Body = Record<string, unknown>;
 type Extra = { type: string; filename?: string };
 
 async function route(method: string, path: string, body: Body, req: Request, store: Store): Promise<[number, unknown, Extra?]> {
+  if (method === "GET" && path === "/games/search") {
+    const q = (new URL(req.url).searchParams.get("q") ?? "").trim();
+    if (q.length > 100) fail(400, "invalid", "Search must be 100 characters or fewer");
+    return [200, { games: q.length < 2 ? [] : searchGames(q) }];
+  }
+
   if (method === "POST" && path === "/sessions") {
     const title = String(body.title ?? "").trim();
     if (!title) fail(400, "invalid", "Title is required");
     if (title.length > 100) fail(400, "invalid", "Title must be 100 characters or fewer");
     if (body.game && String(body.game).trim().length > 100) fail(400, "invalid", "Game must be 100 characters or fewer");
+    // A picked game: the name and cover come from the catalog, not the client.
+    const picked =
+      body.game_igdb_id == null
+        ? null
+        : (gameById(Number(body.game_igdb_id)) ?? fail(400, "invalid", "That game isn't in the game list. Pick it again or type the name."));
     const duration = Number(body.duration_minutes ?? 120);
     const max = Number(body.max_participants ?? 4);
     const earliest = Number(body.earliest_minute ?? 1020);
@@ -217,7 +234,9 @@ async function route(method: string, path: string, body: Body, req: Request, sto
       public_slug: slug,
       organizer_hash: await hash(orgToken),
       title,
-      game: body.game ? String(body.game).trim() || null : null,
+      game: picked ? picked.name : body.game ? String(body.game).trim() || null : null,
+      game_igdb_id: picked?.igdb_id ?? null,
+      game_cover_url: picked?.cover_url ?? null,
       duration_minutes: duration,
       dates,
       earliest_minute: earliest,

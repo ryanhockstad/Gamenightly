@@ -25,6 +25,8 @@ What the backend has to store, compute and enforce for the front end to work. It
 | organizer secret | Hash only | Confirm, reopen, cancel; organizer join |
 | `title` | 1–100 chars | Header, invite text, `.ics` name |
 | `game` | Optional, ≤ 100 chars | Header, invite text, `.ics` summary |
+| `game_igdb_id` | Optional IGDB game id; null for a typed name | Links the session to a game; prefill on cancel |
+| `game_cover_url` | Optional, from IGDB at create time | Cover next to the game name |
 | `duration_minutes` | 30–720, default 120 | Match length; confirm end = start + duration |
 | `dates` | Set of 1–35 dates (organizer's zone), span ≤ 35 days | Grid columns; prefill on cancel |
 | `earliest_minute`, `latest_minute` | 0–1439, multiples of 30; defaults 1020 / 120 | Daily window; prefill on cancel |

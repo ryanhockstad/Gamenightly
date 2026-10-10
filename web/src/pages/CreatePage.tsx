@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { api, ApiError } from "../api";
 import { DatePicker } from "../components/DatePicker";
+import { GamePicker, type GameValue } from "../components/GamePicker";
 import { SavedSessions } from "../components/SavedSessions";
 import { saveIdentity } from "../identity";
 import { allTimezones, detectTimezone, durationLabel, minuteLabel } from "../time";
@@ -14,7 +15,7 @@ const MAX_SPAN_DAYS = 35;
 /** Details carried over when an organizer cancels and starts again. */
 export interface Prefill {
   title: string;
-  game: string | null;
+  game: GameValue | null;
   durationMinutes: number;
   maxParticipants: number;
   timezone: string;
@@ -33,7 +34,7 @@ export function CreatePage() {
   const prefill = state?.prefill;
   const [tz, setTz] = useState(() => prefill?.timezone ?? detectTimezone());
   const [title, setTitle] = useState(prefill?.title ?? "");
-  const [game, setGame] = useState(prefill?.game ?? "");
+  const [game, setGame] = useState<GameValue>(prefill?.game ?? { name: "", igdbId: null, coverUrl: null });
   const [dates, setDates] = useState(() => nextDays(prefill?.timezone ?? detectTimezone(), 7));
   const [earliest, setEarliest] = useState(prefill?.earliestMinute ?? 17 * 60);
   const [latest, setLatest] = useState(prefill?.latestMinute ?? 2 * 60);
@@ -56,7 +57,8 @@ export function CreatePage() {
     try {
       const res = await api.createSession({
         title: title.trim(),
-        game: game.trim() || null,
+        game: game.name.trim() || null,
+        game_igdb_id: game.igdbId,
         duration_minutes: duration,
         dates: [...dates].sort(),
         earliest_minute: earliest,
@@ -93,7 +95,7 @@ export function CreatePage() {
             <span className="field-label">
               Game <span className="optional">optional</span>
             </span>
-            <input maxLength={100} value={game} onChange={(e) => setGame(e.target.value)} placeholder="Helldivers 2" />
+            <GamePicker value={game} onChange={setGame} />
           </label>
           <label>
             <span className="field-label">Play for</span>
