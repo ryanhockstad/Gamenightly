@@ -9,6 +9,7 @@ A when2meet-style scheduler for gaming sessions: the organizer picks dates and a
   - [`web/API.md`](web/API.md): the HTTP API the front end calls.
   - [`web/DATA-REQUIREMENTS.md`](web/DATA-REQUIREMENTS.md): what the backend must store, compute and enforce.
   - `web/mock/lib/`: the window and matching logic, which a backend can reuse.
+- [`site/`](site/README.md): the public website (homepage, Privacy Policy, Terms of Service, logo) that Google checks for OAuth verification. Published to GitHub Pages.
 - `archive/data-layer/`: an archived Postgres data layer. The front end doesn't use it; it's kept for reference.
 
 ## Run

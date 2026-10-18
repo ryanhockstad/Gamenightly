@@ -1,26 +1,27 @@
-# gamenightly-site
+# GameNightly public site
 
 The public website for **GameNightly**: the homepage, Privacy Policy, Terms of Service and logo. Google needs these to verify the OAuth consent screen for the bot's Google Calendar access (see [ryanhockstad/gamenight](https://github.com/ryanhockstad/gamenight) issues #2–#6).
 
-Live: https://aaglidden.github.io/gamenightly-site/
+Live: https://ryanhockstad.github.io/Gamenightly/
 
 | Page | URL |
 |---|---|
-| Homepage | https://aaglidden.github.io/gamenightly-site/ |
-| Privacy Policy | https://aaglidden.github.io/gamenightly-site/privacy.html |
-| Terms of Service | https://aaglidden.github.io/gamenightly-site/terms.html |
+| Homepage | https://ryanhockstad.github.io/Gamenightly/ |
+| Privacy Policy | https://ryanhockstad.github.io/Gamenightly/privacy.html |
+| Terms of Service | https://ryanhockstad.github.io/Gamenightly/terms.html |
 | Logo for the consent screen (120×120 PNG) | `assets/logo-120.png` |
 
 ## Files
 
 - `index.html`, `privacy.html`, `terms.html`: plain HTML with no build step. The privacy and terms pages share one header and footer, so a nav change has to be made in both.
-- `styles.css`: brand tokens copied from `Gamenightly/web/src/styles.css`, plus the legal-page styles.
+- `styles.css`: brand tokens copied from `web/src/styles.css`, plus the legal-page styles.
 - `home.css`: homepage only (hero, scroll-driven core features, product cards). The homepage has its own header and footer.
 - `assets/logo.svg`: the master logo. `logo-120.png` (Google consent screen) and `logo-512.png` (Discord app icon / social) are exported from it.
 
 ## Keep in sync with the code
 
 The privacy policy and the homepage's "Find the overlap" and "Lock it in" steps describe exactly what the bot does with Google Calendar. When any of these change, update them:
+Code in [ryanhockstad/gamenight](https://github.com/ryanhockstad/gamenight):
 - `SCOPES` in `src/oauth_server/src/oauth_server/google.py`
 - what's stored in Redis (`storage.py`, `services/store.py`)
 - retention: `SESSION_TTL_SECONDS` in `services/sessions.py` (14 days), and the web app's 30-day session expiry
@@ -28,14 +29,16 @@ The privacy policy and the homepage's "Find the overlap" and "Lock it in" steps 
 ## Run locally
 
 ```bash
-python3 -m http.server 8000
+cd site && python3 -m http.server 8000
 ```
 
 Then open http://localhost:8000.
 
 ## Deploy
 
-GitHub Pages serves `main` from the repo root. Pushing to `main` publishes the site within about a minute.
+`.github/workflows/pages.yml` publishes `site/` to GitHub Pages when `site/` changes on `main`, usually within a minute. The app in `web/` deploys to Cloudflare separately.
+
+One-time setup: in the repo's Settings → Pages, set **Source** to **GitHub Actions**.
 
 ## Re-export the logo PNGs
 
