@@ -1,0 +1,66 @@
+/* Brand tokens match Gamenightly/web/src/styles.css (GameNightly web app). */
+:root {
+  --night-top: #000000;
+  --night-bottom: #1800ad;
+  --purple: #8c52ff;
+  --orange: #ffac33;
+  --yellow: #ffcc4d;
+  --surface: #0c0540;
+  --surface-2: #150c5c;
+  --border: #2a1f85;
+  --text: #ffffff;
+  --muted: #b3a9e3;
+  --ink: #0c0055;
+  --radius: 14px;
+  --font-display: "Archivo", "Arial Black", sans-serif;
+  --font-body: "Open Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  color-scheme: dark;
+  font-family: var(--font-body);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, var(--night-top) 0%, var(--night-bottom) 100%) fixed;
+  background-color: var(--night-top);
+}
+
+a { color: var(--yellow); }
+a:hover { color: var(--orange); }
+
+.wrap { width: 100%; max-width: 860px; margin: 0 auto; padding: 0 16px; }
+
+/* Header / footer */
+.site-header { padding: 18px 0; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+.brand img { width: 36px; height: 36px; }
+.brand span, h1, h2 { font-family: var(--font-display); font-stretch: 125%; font-weight: 800; }
+.brand span { font-size: 20px; }
+nav { display: flex; gap: 18px; }
+nav a { color: var(--muted); text-decoration: none; font-weight: 600; }
+nav a:hover, nav a[aria-current="page"] { color: var(--text); }
+
+main { flex: 1; padding-bottom: 48px; }
+
+.site-footer { border-top: 1px solid var(--border); padding: 20px 0 28px; color: var(--muted); font-size: 14px; }
+.site-footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.site-footer a { color: var(--muted); }
+
+h2 { font-size: 22px; margin: 0 0 14px; color: var(--yellow); }
+
+/* Legal pages */
+.doc h1 { font-size: clamp(28px, 6vw, 40px); margin: 28px 0 4px; }
+.doc .meta { color: var(--muted); margin: 0 0 24px; }
+.doc h2 { font-size: 19px; margin-top: 32px; }
+.doc li { margin-bottom: 6px; }
+.callout { background: var(--surface-2); border-left: 4px solid var(--orange); border-radius: 8px; padding: 14px 16px; }
+.todo { background: var(--yellow); color: var(--ink); padding: 0 4px; border-radius: 4px; font-weight: 700; }

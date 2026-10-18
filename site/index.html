@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GameNightly</title>
+  <meta name="description" content="GameNightly finds a time when the whole squad is free, then gets it on everyone's calendar." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body class="home">
+  <header class="home-header">
+    <div class="home-wrap">
+      <a class="home-brand" href="./" aria-label="GameNightly home">
+        <img src="assets/logo.svg" alt="" />
+        <span>Game<span class="brand-night">Nightly</span></span>
+      </a>
+      <a class="cta" href="https://gamenightly.aaglidd.workers.dev">
+        Plan a game night
+        <span class="cta-arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-lines" aria-hidden="true"></div>
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <h1 id="hero-title" class="hero-title">Game <span>On.</span></h1>
+
+      <div class="phone-stage">
+        <div class="phone" role="img" aria-label="GameNightly on a phone, showing the best times for a game night ranked by who's free">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="app-top">
+              <span class="app-kicker">Game night</span>
+              <span class="app-avatars"><i></i><i></i><i></i><i></i><i></i></span>
+            </div>
+            <p class="app-title">Board game night</p>
+            <p class="app-sub">5 players · 3 hours</p>
+
+            <div class="app-heat">
+              <span style="--c:#8c52ff"></span><span style="--c:#c67fb0"></span><span style="--c:#ffcc4d"></span><span style="--c:#ffac33"></span><span style="--c:#8c52ff"></span><span style="--c:#ffbc40"></span><span style="--c:#ffcc4d"></span>
+              <span style="--c:#c67fb0"></span><span style="--c:#ffac33"></span><span style="--c:#ffcc4d"></span><span style="--c:#ffcc4d"></span><span style="--c:#c67fb0"></span><span style="--c:#8c52ff"></span><span style="--c:#ffac33"></span>
+            </div>
+
+            <p class="app-label">Best times</p>
+            <ul class="app-times">
+              <li class="best"><span><b>Fri</b> 7:00 PM</span><em>Everyone</em></li>
+              <li><span><b>Sat</b> 6:30 PM</span><em>4 of 5</em></li>
+              <li><span><b>Thu</b> 8:00 PM</span><em>3 of 5</em></li>
+            </ul>
+            <span class="app-btn">Lock it in</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-copy">
+        <p>GameNightly finds a time when the whole squad is free, then gets it on everyone's calendar.</p>
+        <div class="hero-actions">
+          <a class="btn-pill btn-solid" href="https://gamenightly.aaglidd.workers.dev">Plan a game night</a>
+          <a class="btn-pill btn-ghost" href="#how">See how it works</a>
+        </div>
+        <p class="hero-note">Works in Discord and on the web.</p>
+        <div class="hero-platforms">
+          <svg role="img" aria-label="Discord" viewBox="0 0 24 24" fill="currentColor"><title>Discord</title><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+          <svg role="img" aria-label="Web" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><title>Web</title><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.8 3.9 6 3.9 9.5s-1.3 6.7-3.9 9.5c-2.6-2.8-3.9-6-3.9-9.5s1.3-6.7 3.9-9.5z"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Horizontal scroll: core features -->
+    <section class="core" id="how" aria-labelledby="core-title">
+      <div class="home-wrap core-head">
+        <h2 id="core-title" class="core-title">How it <span>works</span></h2>
+        <p class="core-sub">Four steps from a group chat full of “I’m free Thursday?” to a game night on the calendar.</p>
+      </div>
+
+      <div class="core-pin">
+        <div class="home-wrap core-stage">
+          <div class="core-phone" aria-hidden="true">
+            <div class="phone phone-sm">
+              <div class="phone-notch"></div>
+              <div class="phone-screen core-screens">
+                <!-- 1: start -->
+                <div class="core-screen" data-i="0">
+                  <span class="app-kicker">New game night</span>
+                  <p class="app-title">Find a time to <span class="accent">play</span></p>
+                  <span class="mini-field">Board game night</span>
+                  <div class="screen-row"><span class="mini-field">Game · optional</span><span class="mini-field">3 hours</span></div>
+                  <span class="mini-field">5 players</span>
+                  <p class="app-label">What dates might work?</p>
+                  <div class="screen-dates"><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i></div>
+                  <span class="app-btn">Create game night</span>
+                </div>
+                <!-- 2: overlap -->
+                <div class="core-screen" data-i="1">
+                  <span class="app-kicker">Your availability</span>
+                  <p class="app-title">When are you free?</p>
+                  <span class="screen-linked">✓ Google Calendar linked</span>
+                  <div class="mini-grid screen-grid">
+                    <span class="on"></span><span class="on"></span><span></span><span class="on"></span><span></span>
+                    <span></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span>
+                    <span></span><span></span><span class="on"></span><span class="on"></span><span class="on"></span>
+                    <span class="on"></span><span></span><span class="on"></span><span></span><span class="on"></span>
+                    <span class="on"></span><span class="on"></span><span></span><span></span><span class="on"></span>
+                  </div>
+                  <p class="app-sub">Busy blocks come from your calendar. Tap to change any time.</p>
+                </div>
+                <!-- 3: best times -->
+                <div class="core-screen" data-i="2">
+                  <span class="app-kicker">Board game night</span>
+                  <p class="app-title">Best times</p>
+                  <div class="app-heat">
+                    <span style="--c:#8c52ff"></span><span style="--c:#c67fb0"></span><span style="--c:#ffcc4d"></span><span style="--c:#ffac33"></span><span style="--c:#8c52ff"></span><span style="--c:#ffbc40"></span><span style="--c:#ffcc4d"></span>
+                  </div>
+                  <ul class="app-times">
+                    <li class="best"><span><b>Fri</b> 7:00 PM</span><em>Everyone</em></li>
+                    <li><span><b>Sat</b> 6:30 PM</span><em>4 of 5</em></li>
+                    <li><span><b>Thu</b> 8:00 PM</span><em>3 of 5</em></li>
+                    <li><span><b>Sun</b> 2:00 PM</span><em>3 of 5</em></li>
+                  </ul>
+                </div>
+                <!-- 4: lock it in -->
+                <div class="core-screen" data-i="3">
+                  <span class="app-kicker">Confirmed</span>
+                  <p class="app-title">Game night is <span class="accent">on</span></p>
+                  <div class="mini-invite">
+                    <span class="invite-day"><small>Fri</small>14</span>
+                    <span class="invite-body"><b>Board game night</b>7:00 PM · 3 hours</span>
+                  </div>
+                  <ul class="screen-guests">
+                    <li><i style="--c:#8c52ff"></i>Organizer<em>Going</em></li>
+                    <li><i style="--c:#ffac33"></i>Player 2<em>Invited</em></li>
+                    <li><i style="--c:#ffcc4d"></i>Player 3<em>Invited</em></li>
+                    <li><i style="--c:#c67fb0"></i>Player 4<em>Invited</em></li>
+                  </ul>
+                  <span class="app-btn">✓ Added to Google Calendar</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="core-cards">
+            <div class="core-progress" aria-hidden="true"><span></span></div>
+            <ol class="core-track">
+              <li class="core-card">
+                <span class="core-num">01</span>
+                <h3>Start a game night</h3>
+                <p>Run <code>/gamenight</code> in your Discord server, or create one on the web. Either way, your group gets one place to answer.</p>
+                <ul>
+                  <li>Name it, pick the game and how long you'll play</li>
+                  <li>Choose the dates and times that might work</li>
+                  <li>Invite your players with one link</li>
+                </ul>
+              </li>
+              <li class="core-card">
+                <span class="core-num">02</span>
+                <h3>Find the overlap</h3>
+                <p>Players link Google Calendar or mark their availability by hand. Nobody has to compare screenshots of their week.</p>
+                <ul>
+                  <li>Linking Google Calendar is optional</li>
+                  <li>We only see free and busy blocks, never your events</li>
+                  <li>Rather not link? Tap the times that work for you</li>
+                </ul>
+              </li>
+              <li class="core-card">
+                <span class="core-num">03</span>
+                <h3>See the best times</h3>
+                <p>GameNightly ranks every time by how many people are free, so the best night is right at the top.</p>
+                <ul>
+                  <li>The heat map runs from purple (just you) to gold (everyone)</li>
+                  <li>Times with the most players rise to the top</li>
+                  <li>See who's free or busy at each time</li>
+                </ul>
+              </li>
+              <li class="core-card">
+                <span class="core-num">04</span>
+                <h3>Lock it in</h3>
+                <p>The organizer picks a time, and GameNightly adds the event to their Google Calendar and invites the players.</p>
+                <ul>
+                  <li>One event on the organizer's calendar</li>
+                  <li>Players get a calendar invite</li>
+                  <li>Then all that's left is to play</li>
+                </ul>
+                <div class="core-actions">
+                  <a class="btn-pill btn-solid" href="https://gamenightly.aaglidd.workers.dev">Plan a game night</a>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product cards -->
+    <section class="features home-wrap" id="features" aria-labelledby="features-title">
+      <h2 id="features-title" class="features-title">From <span>“when’s good?”</span> to on the calendar</h2>
+      <p class="features-sub">Everything your group needs to stop scheduling and start playing.</p>
+
+      <div class="product-grid">
+        <article class="product">
+          <div class="product-art art-start" aria-hidden="true">
+            <div class="chat">
+              <p class="chat-cmd">/gamenight</p>
+              <span class="art-or">or</span>
+              <span class="mini-link">Create in your browser</span>
+            </div>
+          </div>
+          <h3>Start however</h3>
+          <p>Start one in your browser or run <code>/gamenight</code> in your server.</p>
+        </article>
+
+        <article class="product">
+          <div class="product-art art-cal" aria-hidden="true">
+            <div class="mini-cal">
+              <span></span><span class="busy"></span><span></span><span></span><span class="busy"></span>
+              <span class="busy"></span><span></span><span></span><span class="busy"></span><span></span>
+              <span></span><span></span><span class="busy"></span><span></span><span></span>
+            </div>
+            <span class="art-tag">Calendar or by hand</span>
+          </div>
+          <h3>Set your availability</h3>
+          <p>Link your calendar or mark by hand.</p>
+        </article>
+
+        <article class="product">
+          <div class="product-art art-rank" aria-hidden="true">
+            <ul class="mini-rank">
+              <li><span style="--w:100%;--c:#ffcc4d"></span><b>5</b></li>
+              <li><span style="--w:80%;--c:#ffac33"></span><b>4</b></li>
+              <li><span style="--w:60%;--c:#c67fb0"></span><b>3</b></li>
+              <li class="rank-lock">Lock it in</li>
+            </ul>
+          </div>
+          <h3>Lock in the best time</h3>
+          <p>GameNightly ranks the best times for you to lock in.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="home-footer">
+    <div class="home-wrap">
+      <span>© 2026 GameNightly</span>
+      <span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var clamp = function (v) { return Math.min(1, Math.max(0, v)); };
+      var hero = document.querySelector(".hero");
+      var core = document.querySelector(".core-pin");
+      var screens = document.querySelectorAll(".core-screen");
+      var cards = document.querySelectorAll(".core-card");
+      var pinned = window.matchMedia("(min-width: 900px)");
+      var ticking = false;
+
+      function update() {
+        ticking = false;
+        // Hero: the phone starts over the headline and drops back as you scroll.
+        hero.style.setProperty("--p", clamp(window.scrollY / (hero.offsetHeight * 0.5)).toFixed(3));
+
+        // Core features: scrolling down slides the cards sideways and swaps the phone screen.
+        if (!pinned.matches) return;
+        var r = core.getBoundingClientRect();
+        var cp = clamp(-r.top / (core.offsetHeight - window.innerHeight));
+        core.style.setProperty("--cp", cp.toFixed(4));
+        var active = Math.round(cp * (cards.length - 1));
+        cards.forEach(function (c, i) { c.classList.toggle("is-active", i === active); });
+        screens.forEach(function (s, i) { s.classList.toggle("is-past", i < active); s.classList.toggle("is-active", i === active); });
+      }
+      function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
+      document.documentElement.classList.add("js-motion");
+      update();
+    })();
+  </script>
+</body>
+</html>
