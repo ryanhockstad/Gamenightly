@@ -274,7 +274,7 @@
 
 /* Availability grid (phone screen) */
 .mini-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; width: 100%; max-width: 250px; }
-.mini-grid span { aspect-ratio: 1; border-radius: 6px; background: var(--cell, #1f166e); border: 1px solid var(--border); }
+.mini-grid span { aspect-ratio: 1; border-radius: 6px; background: #1f166e; border: 1px solid var(--border); }
 .mini-grid span.on { background: var(--purple); border-color: #a87bff; box-shadow: 0 0 12px rgba(140, 82, 255, 0.5); }
 
 /* Ranked */

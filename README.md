@@ -20,7 +20,7 @@ Live: https://aaglidden.github.io/gamenightly-site/
 
 ## Keep in sync with the code
 
-The privacy policy and the Google Calendar card on the homepage describe exactly what the bot does. When any of these change, update both:
+The privacy policy and the homepage's "Find the overlap" and "Lock it in" steps describe exactly what the bot does with Google Calendar. When any of these change, update them:
 - `SCOPES` in `src/oauth_server/src/oauth_server/google.py`
 - what's stored in Redis (`storage.py`, `services/store.py`)
 - retention: `SESSION_TTL_SECONDS` in `services/sessions.py` (14 days), and the web app's 30-day session expiry
